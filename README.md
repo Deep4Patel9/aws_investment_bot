@@ -13,11 +13,11 @@ This project uses python 3.7 for the lambda function and AWS Lex to create a cha
 ## Usage
 
 Below are two gifs of the Lex Chatbot:
-Chatbot without Lambda function:
-![A AWS Lex Chatbot without the lambda function.](lex_gifs/no_lambda.gif)
+Chatbot without Lambda function:<br>
+![A AWS Lex Chatbot without the lambda function.](lex_gifs/no_lambda.gif)<br>
 
-Chatbot using the Lambda function:
-![A AWS Lex Chatbot using the lambda function.](lex_gifs/lambda.gif)
+Chatbot using the Lambda function:<br>
+![A AWS Lex Chatbot using the lambda function.](lex_gifs/lambda.gif)<br>
 
 ---
 

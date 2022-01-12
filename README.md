@@ -6,7 +6,7 @@ This is a AWS Lex chatbot lambda function which is used to verify user inputs an
 
 ## Technologies
 
-This project uses python 3.7 for the lambda function and aws Lex to create a chat bot.
+This project uses python 3.7 for the lambda function and AWS Lex to create a chat bot.
 
 ---
 

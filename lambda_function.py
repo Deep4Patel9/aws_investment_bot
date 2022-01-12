@@ -124,6 +124,25 @@ def validate_investment_amount(investment_amount, intent_request):
     # A True results is returned if age or amount are valid
     return build_validation_result(True, None, None)
 
+def validate_risk_level(risk_level, intent_request):
+    """
+    Validates the riskLevel provided by the user.
+    """
+
+    # Validate the investment_amount should be equal to or greater than 5000.
+    if risk_level is not None:
+        if risk_level.lower() not in ['low', 'medium', 'high', 'none']:
+            return build_validation_result(
+                False,
+                "riskLevel",
+                "The riskLevel should be of the following: none, low, medium, high, "
+                "Please provide a valid Risk Level.",
+            )
+
+    # A True results is returned if age or amount are valid
+    return build_validation_result(True, None, None)
+
+
 def risk_recommend(risk_level, intent_request):
     risk_level = risk_level.lower()
     if risk_level == 'low':
@@ -132,7 +151,7 @@ def risk_recommend(risk_level, intent_request):
         return "40% bonds (AGG), 60% equities (SPY)"
     elif risk_level == 'high':
         return "20% bonds (AGG), 80% equities (SPY)"
-    else: 
+    elif risk_level == 'none': 
         return "100% bonds (AGG), 0% equities (SPY)"
 
     
@@ -187,6 +206,23 @@ def recommend_portfolio(intent_request):
                 slots,
                 invest_amount_valid["violatedSlot"],
                 invest_amount_valid["message"],
+            )
+
+        # Fetch current session attributes
+        output_session_attributes = intent_request["sessionAttributes"]
+
+        risk_level_valid = validate_risk_level(risk_level, intent_request)
+
+        if not risk_level_valid["isValid"]:
+            slots[risk_level_valid["violatedSlot"]] = None  # Cleans invalid slot
+
+            # Returns an elicitSlot dialog to request new data for the invalid slot
+            return elicit_slot(
+                intent_request["sessionAttributes"],
+                intent_request["currentIntent"]["name"],
+                slots,
+                risk_level_valid["violatedSlot"],
+                risk_level_valid["message"],
             )
 
         # Fetch current session attributes

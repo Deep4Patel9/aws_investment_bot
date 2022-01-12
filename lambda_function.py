@@ -124,12 +124,13 @@ def validate_investment_amount(investment_amount, intent_request):
     # A True results is returned if age or amount are valid
     return build_validation_result(True, None, None)
 
+
 def validate_risk_level(risk_level, intent_request):
     """
     Validates the riskLevel provided by the user.
     """
 
-    # Validate the investment_amount should be equal to or greater than 5000.
+    # Validate the risk_level should be 'low', 'medium', 'high', 'none'.
     if risk_level is not None:
         if risk_level.lower() not in ['low', 'medium', 'high', 'none']:
             return build_validation_result(
